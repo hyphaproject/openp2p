@@ -66,7 +66,7 @@ namespace p2p {
 			auto& packet = signedPacket.packet;
 			packet.header.version = VERSION_1;
 			packet.header.state = message.routineState;
-			packet.header.sub = message.subnetwork;
+			packet.header.sub = static_cast<bool>(message.subnetwork);
 			packet.header.type = message.type;
 			packet.header.length = message.payload.size();
 			packet.header.routine = message.routine;
