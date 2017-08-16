@@ -96,7 +96,6 @@ set_target_properties(${target}
 
 target_include_directories(${target}
     PRIVATE
-    ${PROJECT_BINARY_DIR}/source/include
     ${CMAKE_SOURCE_DIR}/include
     ${CMAKE_CURRENT_BINARY_DIR}/include
 
@@ -104,7 +103,6 @@ target_include_directories(${target}
     ${DEFAULT_INCLUDE_DIRECTORIES}
 
     INTERFACE
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include>
     $<INSTALL_INTERFACE:include>
 )

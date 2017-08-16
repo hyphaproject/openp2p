@@ -50,10 +50,10 @@ endif()
 
 # Meta information about the project
 set(META_PROJECT_NAME        "OpenP2P")
-set(META_PROJECT_DESCRIPTION "CMake Project Template")
-set(META_AUTHOR_ORGANIZATION "CG Internals GmbH")
-set(META_AUTHOR_DOMAIN       "https://github.com/cginternals/cmake-init/")
-set(META_AUTHOR_MAINTAINER   "opensource@cginternals.com")
+set(META_PROJECT_DESCRIPTION "Network layer library for facilitating decentralised peer-to-peer communication.")
+set(META_AUTHOR_ORGANIZATION "OpenP2P")
+set(META_AUTHOR_DOMAIN       "http://openp2p.org")
+set(META_AUTHOR_MAINTAINER   "Stephen Cross")
 set(META_VERSION_MAJOR       "1")
 set(META_VERSION_MINOR       "0")
 set(META_VERSION_PATCH       "0")
@@ -75,7 +75,7 @@ option(BUILD_SHARED_LIBS     "Build shared instead of static libraries."        
 option(OPTION_SELF_CONTAINED "Create a self-contained install with all dependencies." OFF)
 option(OPTION_BUILD_TESTS    "Build tests."                                           ON)
 option(OPTION_BUILD_DOCS     "Build documentation."                                   OFF)
-option(OPTION_BUILD_EXAMPLES "Build examples."                                        OFF)
+option(OPTION_BUILD_EXAMPLES "Build examples."                                        ON)
 
 
 # 
@@ -183,7 +183,13 @@ endif()
 add_subdirectory(source)
 add_subdirectory(docs)
 add_subdirectory(examples)
-#add_subdirectory(deploy)
+
+if(OPTION_BUILD_TESTS)
+    set(IDE_FOLDER "Tests")
+    add_subdirectory(tests)
+endif()
+
+add_subdirectory(deploy)
 
 
 # 
@@ -194,10 +200,10 @@ add_subdirectory(examples)
 install(FILES "${PROJECT_BINARY_DIR}/VERSION" DESTINATION ${INSTALL_ROOT} COMPONENT runtime)
 
 # Install cmake find script for the project
-install(FILES ${META_PROJECT_NAME}-config.cmake DESTINATION ${INSTALL_ROOT} COMPONENT dev)
+install(FILES ${META_PROJECT_NAME}Config.cmake DESTINATION ${INSTALL_ROOT} COMPONENT dev)
 
 # Install the project meta files
-install(FILES AUTHORS   DESTINATION ${INSTALL_ROOT} COMPONENT runtime)
+#install(FILES AUTHORS   DESTINATION ${INSTALL_ROOT} COMPONENT runtime)
 install(FILES LICENSE   DESTINATION ${INSTALL_ROOT} COMPONENT runtime)
 install(FILES README.md DESTINATION ${INSTALL_ROOT} COMPONENT runtime)
 
